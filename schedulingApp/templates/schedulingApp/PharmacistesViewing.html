@@ -1,0 +1,34 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+<h1>Visualise prescription pharmacist</h1>
+{% for OrdonnancePending in Ordonnances %}
+<div class="card">
+    <div class="card-header">
+    <strong>Written by:  {{OrdonnancePending.Ordonnance.Doctor.username}}</strong>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"> Ordonnance for user: {{OrdonnancePending.Ordonnance.usernameDestination}} </h5>
+    <p class="card-text"><ul>
+      {% for ligne in OrdonnancePending.Ordonnance.ligne.all %}
+        <li> Medication name : {{ligne.Medicament.name}}</li>
+        <li>quantity: {{ligne.quantity}} </li>
+        <li>quantity per day: {{ligne.qauntityPerDay}} </li>
+        <li>remarks: {{ligne.remarks}} </li>
+        </ul></p>
+        {% endfor %}
+        <form action="{% url 'viewOrdonnancePendingInPharmacist' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" id="my-button-accept"  name="action" value="accept">Accept</button>
+            <input type="hidden" name="ordonnanceAccepted" value="{{ OrdonnancePending.Ordonnance.id}}">
+          </form>
+      
+          <form action="{% url 'viewOrdonnancePendingInPharmacist' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="ordonnanceDenied" value="{{ OrdonnancePending.Ordonnance.id}}">
+            <button type="submit" id="my-button-Deny" name="action" value="Deny">Deny</button>
+          </form>
+    </div>
+  </div> 
+<br>
+{% endfor %}
+{% endblock %}

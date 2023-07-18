@@ -1,0 +1,48 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+<h1>Visualise Ordonnance</h1>
+{% csrf_token %}
+{% for Ordonnance in Ordonnances %}
+ 
+{% if Ordonnance.etat == "unsent" %}
+{% if Ordonnance.decision == "neutre" %}
+<div class="card">
+    <div class="card-header">
+        <strong>Written by:  {{Ordonnance.Doctor.username}}</strong>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> Ordonnance </h5>
+      <p class="card-text"><ul>
+        {% for ligne in Ordonnance.ligne.all %}
+         
+        
+        <li> Medication name : {{ligne.Medicament.name}}</li>
+        <li>quantity: {{ligne.quantity}} </li>
+        <li>quantity per day: {{ligne.qauntityPerDay}} </li>
+        <li>remarks: {{ligne.remarks}} </li>
+      
+        
+        <hr>
+        
+        {% endfor %}
+        <form id="ordonnancesFinal" method="POST" action="{% url 'viewOrdonnance' %}">
+            {% csrf_token %}
+    
+            
+        <div class="mb-3">
+            <label for="Pharmacist" class="form-label">user name of Pharmacist : </label>
+            <input type="text" class="form-control" id="Pharmacist" aria-describedby="emailHelp" name="Pharmacist" required>
+            <input type="hidden" class="form-control" id="medicId" aria-describedby="emailHelp" name="medicId" value={{Ordonnance.id}} required>
+          </div>
+            <input type="submit" value="Submit Ordonnance" class="btn btn-secondary"><br>
+            <br> 
+      
+        </form>
+        </ul></p>
+    </div>
+</div>
+<br>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endblock %}

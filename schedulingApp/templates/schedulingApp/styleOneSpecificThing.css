@@ -1,0 +1,11 @@
+.multi_columns {
+	column-count: 5;
+	column-gap: 34px;
+	font-size: 13px;
+	padding: 11px;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	line-height: 15px;
+	text-align: groove;
+	column-rule: 1px groove #78def0;
+	background-color: #FFFFFF;
+}

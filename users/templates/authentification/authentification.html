@@ -1,0 +1,22 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+ 
+<form action="" method="POST">
+    {% csrf_token %}
+  
+    <div class="mb-3">
+        <label for="nameInput" class="form-label">name</label>
+        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="username"">
+      
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+    </div>
+  
+
+    <input type="submit" value="Submit" class="btn btn-secondary">
+
+
+
+    
+  {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+<h1>Visualise Accepted Ordonnance</h1>
+{% csrf_token %}
+{% for Ordonnance in Ordonnances %}
+ 
+{% if Ordonnance.decision == "Accepted" %}
+<div class="card">
+    <div class="card-header">
+        <strong>Written by:  {{Ordonnance.Doctor.username}}</strong>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> Ordonnance </h5>
+      <p class="card-text"><ul>
+        {% for ligne in Ordonnance.ligne.all %}
+         
+        
+        <li> Medication name : {{ligne.Medicament.name}}</li>
+        <li>quantity: {{ligne.quantity}} </li>
+      
+        
+        <hr>
+        
+        {% endfor %}
+        
+        </ul></p>
+    </div>
+</div>
+<br>
+ 
+{% endif %}
+{% endfor %}
+{% endblock %}

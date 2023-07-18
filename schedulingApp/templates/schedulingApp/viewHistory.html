@@ -1,0 +1,33 @@
+{% extends 'schedulingApp/baseLineForSpecific.html' %}  
+{% block content %}
+{% load static %}
+<br> 
+<h1>Download presciption</h1>
+{% csrf_token %}
+<script>
+    function onclickDownload(param){
+        
+        url='/download/' + param + '/';
+        window.location.href = url;
+    }
+      </script>
+<div class="grid-container">
+ 
+{% for Ordonnance in Ordonnances %}
+    
+ 
+<div class="grid-item" onclick="onclickDownload('{{Ordonnance.id}}')" >
+    <div class="download-image"> 
+        <img src= "{% static 'images/pdfLogo.png' %}" alt="PDF 1 Thumbnail" width="80%">  
+    </div> 
+    
+    <div class="legend">
+         <p>{{Ordonnance.date}}</p> 
+         <p>{{Ordonnance.usernameDestination}}</p>
+    </div> 
+    
+</div>
+{% endfor %}
+</div>
+ 
+{% endblock %}

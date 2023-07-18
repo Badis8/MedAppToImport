@@ -1,0 +1,75 @@
+li a:hover {
+    color: rgb(251, 251, 251); /* Custom text color on hover */
+    
+  }
+ li{
+    color: #000000; /* Custom text color */
+    font-size: 18px; /* Custom font size */
+    font-weight: bold; /* Custom font weight */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth color transition on hover */
+  
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+ }
+
+
+ .navbar-nav .nav-item .nav-link {
+    color: #000000; /* Custom text color */
+    font-size: 18px; /* Custom font size */
+    font-family: "Roboto", sans-serif;/* Custom font weight */
+    font-size: 16px;
+    font-weight: 700;
+    transition: color 0.3s;  
+  }
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    color:#FFFFE0 /* Change the hover color to your desired value */
+  }
+  .logoContainer{
+    border-radius:12px;
+    border: 1px solid #ccc;
+    height: 50px;
+  }
+  .conntectedUser{
+    border-radius:12px;
+    border: 1px solid #ccc;
+    width:1400px;
+ 
+  }
+  .options{
+display: flex;
+  list-style: none;
+  padding: 0;
+ 
+  justify-content: flex-end;
+  height: 50px;
+ 
+  }
+  .options li {
+    margin-right: 10px; /* Adjust the spacing between items */
+  }
+ 
+    .element{
+        border-right:1px solid rgba(27, 4, 4, 0.181) ;
+        height: 50px;
+    }
+.options li:last-child .element{
+    border-right: none;
+}
+
+.addedSimpleActions{
+    border-radius:12px;
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 50px;
+
+}
+.optionsShort{
+    display: flex;
+  list-style: none;
+  padding: 0;
+  width:80px;
+  justify-content: flex-end;
+  height: 50px;
+} 

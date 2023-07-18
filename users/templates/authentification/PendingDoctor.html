@@ -1,0 +1,37 @@
+{% extends 'schedulingApp/baseLine.html' %}
+
+{% block content %}
+<h3>Doctors:</h3>
+  
+{% for doctor in doctors%}
+<div class="card">
+    <div class="card-header">
+        <strong> {{doctor}}</strong>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">  Doctor {{doctor.Last_name}} </h5>
+      <p class="card-text"><ul>
+        <li> First name: {{doctor.First_name}}</li>
+        <li> Last name: {{doctor.Last_name}}</li>
+        <li> Email Address: {{doctor.Email}}</li>
+        <li> speciality: {{doctor.Specialty}}</li>
+        <li>phone number: {{doctor.phoneNumber}}</li>
+        </ul></p>
+        <form action="{% url 'PendingDoctor' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" id="my-button-accept"  name="action" value="accept">Accept</button>
+            <input type="hidden" name="doctor_id_Accepted" value="{{ doctor.username }}">
+          </form>
+           
+          <form action="{% url 'PendingDoctor' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="doctor_id_Denied" value="{{ doctor.username }}">
+            <button type="submit" id="my-button-Deny" name="action" value="Deny">Deny</button>
+          </form>
+    </div>
+  </div> 
+<br>
+{% endfor %}
+ 
+
+{% endblock %}

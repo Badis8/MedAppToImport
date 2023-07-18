@@ -1,0 +1,184 @@
+{% extends 'schedulingApp/baseLine.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+            There was an error with your form...
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+
+
+{% endif %}	
+<script>
+    function showNormalFields() {
+        if( document.getElementById("PharmacistAddressLabel")!=null){
+        document.getElementById("PharmacistAddressLabel").style.display = "none";
+        document.getElementById("PharmacistAddress").style.display = "none";
+        document.getElementById("PharmacistAddress").removeAttribute('required');
+        document.getElementById("PhoneNumberLabelPharmacist").style.display = "none";
+        document.getElementById("PhoneNumberPharmacist").style.display = "none";
+        document.getElementById("PhoneNumberPharmacist").removeAttribute('required');
+        }
+         if( document.getElementById("DoctorSpeciltyLabel")!=null){
+        document.getElementById("DoctorSpeciltyLabel").style.display = "none";
+        document.getElementById("DoctorSpecilty").style.display = "none";
+        document.getElementById("DoctorSpecilty").removeAttribute('required');
+        document.getElementById("DoctorAddressLabel").style.display = "none";
+        document.getElementById("DoctorAddress").style.display = "none";
+        document.getElementById("DoctorAddress").removeAttribute('required');
+        document.getElementById("PhoneNumber").style.display = "none";
+        document.getElementById("PhoneNumberLabel").style.display = "none";
+        document.getElementById("PhoneNumber").removeAttribute('required');
+         }
+    }
+    
+    function showDoctorFields() {
+  
+        if( document.getElementById("PharmacistAddressLabel")!=null){
+            document.getElementById("PharmacistAddressLabel").style.display = "none";
+            document.getElementById("PharmacistAddress").style.display = "none";
+            document.getElementById("PharmacistAddress").removeAttribute('required');
+            document.getElementById("PhoneNumberLabelPharmacist").style.display = "none";
+            document.getElementById("PhoneNumberPharmacist").style.display = "none";
+            document.getElementById("PhoneNumberPharmacist").removeAttribute('required');
+ 
+        }
+        document.getElementById("DoctorSpeciltyLabel").style.display = "block";
+        document.getElementById("DoctorSpecilty").style.display = "block";
+        document.getElementById("DoctorSpecilty").setAttribute("required","");
+        document.getElementById("DoctorAddressLabel").style.display = "block";
+        document.getElementById("DoctorAddress").style.display = "block";
+        document.getElementById("DoctorAddress").setAttribute("required","");
+        document.getElementById("PhoneNumber").style.display = "block";
+        document.getElementById("PhoneNumber").setAttribute("required","");
+        document.getElementById("PhoneNumberLabel").style.display = "block";
+         
+    }
+
+
+    function showPharmacistFields() {
+        if(document.getElementById("DoctorSpecilty")!=null){
+            document.getElementById("DoctorSpeciltyLabel").style.display = "none";
+            document.getElementById("DoctorSpecilty").style.display = "none";
+            document.getElementById("DoctorSpecilty").removeAttribute('required');
+            document.getElementById("DoctorAddressLabel").style.display = "none";
+            document.getElementById("DoctorAddress").style.display = "none";
+            document.getElementById("DoctorAddress").removeAttribute('required');
+            document.getElementById("PhoneNumber").style.display = "none";
+            document.getElementById("PhoneNumber").removeAttribute('required');
+            document.getElementById("PhoneNumberLabel").style.display = "none";
+        }
+        document.getElementById("PharmacistAddressLabel").style.display = "block";
+        document.getElementById("PharmacistAddress").style.display = "block";
+        document.getElementById("PharmacistAddress").setAttribute("required","");
+        document.getElementById("PhoneNumberLabelPharmacist").style.display = "block";
+        document.getElementById("PhoneNumberPharmacist").style.display = "block";
+        document.getElementById("PhoneNumberPharmacist").setAttribute("required","");
+ 
+
+     
+    }
+    </script>
+<br>
+<br>
+	<div class="shadow p-4 mb-5 bg-body rounded">
+	<h1>Register</h1>
+ 
+
+<br> 
+		<form action="{% url 'Register' %}" method=POST>
+			{% csrf_token %}
+            <div class="mb-3">
+
+
+                
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">user name</label>
+                    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="username" required>
+                <div class="mb-3">
+
+
+                      
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label">Firt Name</label>
+                    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="firstName" required>
+                <div class="mb-3">
+
+                          
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="LastName" required>
+                    <div class="mb-3">
+
+                        <div class="mb-3">
+                            <label for="nameInput" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="EmailAddress" required>
+                        <div class="mb-3">
+                            
+
+
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+                </div>
+   
+
+
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="Normal"  onclick="showNormalFields()"  checked>
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Register as normal user
+                </label>
+              </div>
+          
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="Doctor"  onclick="showDoctorFields()"   >
+                <label class="form-check-label" for="flexRadioDefault2">
+                  Register as a Doctor
+                </label>
+              </div>
+              <div class="mb-3">
+                <label for="nameInput" class="form-label" id="DoctorSpeciltyLabel" display="none"  style="display:none;">Speciality</label>
+                <input type="text" class="form-control" id="DoctorSpecilty" aria-describedby="emailHelp" name="Speciality"  style="display:none;"   >
+            <div class="mb-3">
+
+                <div class="mb-3">
+                    <label for="nameInput" class="form-label" id="DoctorAddressLabel"  style="display:none;">Address</label>
+                    <input type="text" class="form-control" id="DoctorAddress" aria-describedby="emailHelp" name="DoctorAddress"  style="display:none;"  >
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label" id="PhoneNumberLabel"  style="display:none;">PhoneNumber</label>
+                        <input type="text" class="form-control" id="PhoneNumber" aria-describedby="emailHelp" name="PhoneNumber"  style="display:none;" pattern="[0-9]{8}" placeholder="Enter your 8-digit phone number"  >
+                    <div class="mb-3">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="pharmacist" onclick="showPharmacistFields()">
+                <label class="form-check-label" for="flexRadioDefault1">
+                  Register as a pharmacist
+                </label>
+                <div class="mb-3">   
+                    <label for="nameInput" class="form-label" id="PharmacistAddressLabel"  style="display:none;">Address</label>
+                    <input type="text" class="form-control" id="PharmacistAddress" aria-describedby="emailHelp" name="PharmacistAddress"  style="display:none;"  >
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label" id="PhoneNumberLabelPharmacist"  style="display:none;">PhoneNumber</label>
+                        <input type="text" class="form-control" id="PhoneNumberPharmacist" aria-describedby="emailHelp" name="PhoneNumberPharmacist"  style="display:none;" pattern="[0-9]{8}" placeholder="Enter your 8-digit phone number"  >
+                    <div class="mb-3">
+              </div>
+          
+ 
+          
+  
+
+
+			
+<br/><br/>
+			<input type="submit" value="Submit" class="btn btn-secondary">
+
+		</form>
+		
+</div>
+<br/><br/>	
+ 
+{% endblock %}

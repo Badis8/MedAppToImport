@@ -1,0 +1,110 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+<h1>Prepare prescription</h1>
+ 
+<form id="formOrodnnance"  >
+    {% csrf_token %}
+  
+    <div class="mb-3">
+        <label for="medicInput" class="form-label">name of the medic : </label>
+        <input type="text" list="nameMedic" class="form-control" id="medicInput" aria-describedby="emailHelp" name="nameMedic">
+        <datalist id="nameMedic">
+          {% for med in meds %}
+          <option value="{{med.name}}"> 
+          {% endfor %}
+        </datalist>
+      </div>
+    
+    <div class="mb-3">
+      <label for="quantity" class="form-label">quantity :</label>
+      <input type="number" class="form-control" id="quantity" name="quantity">
+    </div>
+    
+  
+    <div class="mb-3">
+      <label for="quantityPerDay" class="form-label">quantity per day :</label>
+      <input type="number" class="form-control" id="quantityPerDay" name="quantityPerDay">
+    </div>
+    
+    
+    <div class="mb-3">
+      <label for="Remarks" class="form-label">special remarks:</label>
+      <input type="text" class="form-control" id="Remarks" name="Remarks">
+    </div>
+    
+    <input type="submit" value="Add medic" class="btn btn-secondary" onclick="addInput(document.getElementById('medicInput').value,document.getElementById('quantity').value,document.getElementById('quantityPerDay').value,document.getElementById('Remarks').value)">
+</form>
+<br> 
+ 
+    <form id="ordonnancesFinal" method="POST" action="{% url 'PrepareOrdonnance' %}">
+        {% csrf_token %}
+
+        
+    <div class="mb-3">
+        <label for="patientname" class="form-label">name of patient : </label>
+        <input type="text" class="form-control" id="patientname" aria-describedby="emailHelp" name="patientname">
+      </div>
+  
+        <input type="hidden" name="medicines" id="medicines" value="" />
+        <input type="submit" value="Submit Ordonnance" class="btn btn-secondary"><br>
+        <br> 
+ 
+	</form>
+
+    <script>
+        function addInput(value,quantity,quantityPerDay,Remarks) {
+            event.preventDefault();       
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "medicName[]";
+            input.value=value
+            input.readOnly = true; 
+ 
+
+            var inputQuantity = document.createElement("input");
+            inputQuantity.type = "text";
+            inputQuantity.name = "medicQuantity[]";
+            inputQuantity.value=quantity
+            inputQuantity.readOnly = true; 
+
+
+
+            var inputQuantityPerDay = document.createElement("input");
+            inputQuantityPerDay.type = "text";
+            inputQuantityPerDay.name = "medicQuantityPerDay[]";
+            inputQuantityPerDay.value=quantityPerDay
+            inputQuantityPerDay.readOnly = true; 
+
+
+            
+            var remarks = document.createElement("input");
+            remarks.type = "text";
+            remarks.name = "Remarks[]";
+            remarks.value=Remarks
+            remarks.readOnly = true; 
+
+            document.getElementById("ordonnancesFinal").appendChild(input); 
+            document.getElementById("ordonnancesFinal").appendChild(inputQuantity);
+            document.getElementById("ordonnancesFinal").appendChild(inputQuantityPerDay); 
+            document.getElementById("ordonnancesFinal").appendChild(remarks);
+            var br = document.createElement("br");
+            document.getElementById("ordonnancesFinal").appendChild(br);
+
+            var medicines = document.getElementById("medicines").value;
+            var newMedicine = {
+                name: value,
+                quantity: quantity,
+                quantityPerDay:quantityPerDay,
+                Remarks:Remarks
+            };
+            var medicinesArray = medicines ? JSON.parse(medicines) : [];
+            medicinesArray.push(newMedicine);
+            document.getElementById("medicines").value = JSON.stringify(medicinesArray);
+           
+         
+
+        }
+   
+    </script>
+
+{% endblock %}

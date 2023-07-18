@@ -1,0 +1,189 @@
+{% extends 'schedulingApp/baselineForPrsentationPage.html' %}  
+{% block content %}
+{% if user.is_authenticated %}
+{% load static %}
+ {% if isDoctor   %}
+ <div class="doctorContainer">
+    <div class="row">
+            <div class="col">
+                <h1>Welcome Doctor {{user.first_name}}</h1>
+                <hr width="28%">
+                <p>We extend our heartfelt gratitude for the noble work you perform each day. <br>
+                    It is a privilege for us to be a part of your journey in enhancing the   
+                    well-being <br>of individuals, promoting better health, and ultimately bringing happiness to their lives.</p>
+            </div>
+            <div class="col">
+                   
+                   
+                    <div class="cardDoctorOne" onclick="window.location.href = '/PrepareOrdonnance';">
+                        <center> <img src="{% static 'images/logoP.png' %}" width="45%"> 
+                        <h5>Write prescription</h5>
+                        <hr>
+                    </center>
+                        <p> generate prescriptions for specific users without the need for physical contact. <br>
+                            the prescription will be automatically sent to the intended recipient. </p>
+                    </div>
+           
+                    <div class="cardDoctorOne card2" onclick="window.location.href = '/seeWrittenOrdonnace';">
+                        <center> <img src="{% static 'images/archive.png' %}" width="45%"> 
+                        <h5>view prescriptions</h5>
+                        <hr>
+                    </center>
+                        <p> view all the written prescriptions and download them with a click ! </p>
+                    </div>
+
+
+                  
+            </div>
+    </div>
+ </div>
+ {% endif %}
+ 
+ {% if isChecker   %}
+    <div class="checkerContainer">
+     
+    <div class="row">
+      
+            <div class="col">
+            
+                <h1>Welcome {{user.first_name}}</h1>
+                <hr width="28%">
+                <p>We greatly appreciate your diligent efforts in ensuring the professionalism
+                    of our platform<br> by verifying and maintaining a community of committed and trustworthy doctors and pharmacists."
+            </div>
+            <div class="col">
+                <div class="cardExpertOne card2" onclick="window.location.href = '/users/PendingDoctors';">
+                    <center> <img src="{% static 'images/logoLoupe.png' %}" width="45%"> 
+                    <h5>check pending pharmacists</h5>
+                    <hr>
+                </center>
+                <p>review and decide the access of pending pharmacists, ensuring only the most
+                    <br> qualified professionals join our platform </p>
+                </div>
+
+                   
+                <div class="cardExpertOne" onclick="window.location.href = '/users/PendingDoctors';">
+                    <center> <img src="{% static 'images/logoLoupe.png' %}" width="45%"> 
+                        <h5>Check pending doctors</h5>
+                    <hr>
+                    </center>
+                        <p>review and decide the access of pending doctors, ensuring only the most
+                            <br> qualified professionals join our platform </p>
+                    </div>          
+            </div>
+    </div>
+ 
+ 
+</div>
+
+ {% endif %}
+
+
+ {% if isNormalUser   %}
+ <div class="normalContainer">
+     <br>
+    <div class="row">
+      
+            <div class="col">
+            
+                <h1>Welcome {{user.first_name}}</h1>
+                <hr width="28%">
+               <p>Welcome back! Our utmost priority is to provide exceptional
+                 service and support throughout your recovery process.<br>
+                <p>
+            </div>
+            <div class="col">
+                <div class="cardNormalOne card2" onclick="window.location.href = 'viewOrdonnance';">
+                    <center> <img src="{% static 'images/logoP.png' %}" width="45%"> 
+                    <h5>check prescriptions</h5>
+                    <hr>
+                </center>
+                <p> visualise your prescriptions and send them to a pharmacist !</p>
+                </div>
+
+                   
+                <div class="cardNormalOne" onclick="window.location.href = 'viewOrdonnancePending';">
+                    <center> <img src="{% static 'images/blackP.png' %}" width="45%"> 
+                        <h5>check pending prescriptions</h5>
+                    <hr>
+                    </center>
+                        <p>visualise pending prescriptions </p>
+                    </div>          
+           
+            <div class="cardNormalOne" onclick="window.location.href = 'acceptedOrdonnances';">
+                <center> <img src="{% static 'images/archive.png' %}" width="45%"> 
+                    <h5>Check accepted prescriptions</h5>
+                <hr>
+                </center>
+                    <p>visualise the accepted presciption from a pharmacist</p>
+                </div>          
+        </div>
+    </div>
+</div>
+ 
+</div>
+
+ {% endif %}
+ {% if isPharmacist   %}
+ <div class="pharmacistContainer">
+    <div class="row">
+            <div class="col">
+                <h1>Welcome pharmacist {{user.first_name}}</h1>
+                <hr width="28%">
+                <p>We extend our heartfelt gratitude for the noble work you perform each day. <br>
+                    It is a privilege for us to be a part of your journey in enhancing the   
+                    well-being <br>of individuals, promoting better health, and ultimately bringing happiness to their lives.</p>
+            </div>
+            <div class="col">
+                   
+                   
+                    <div class="cardPharmacistOne" onclick="window.location.href = '/viewOrdonnancePendingInPharmacist';">
+                        <center> <img src="{% static 'images/logoP.png' %}" width="45%"> 
+                        <h5>visualise prescriptions</h5>
+                        <hr>
+                    </center>
+                        <p> visualise the prescriptions requested from users and answer them </p>
+                    </div>
+           
+                     
+
+
+                  
+            </div>
+    </div>
+ </div>
+
+ {% endif %}
+
+{% else %}
+
+
+
+<div class="checkerContainer">
+     
+    <div class="row">
+      
+            <div class="col">
+            
+                <h1>Welcome Visiter</h1>
+                <hr width="28%">
+                <p>Thank you for visiting our platform! Our mission is to streamline the medical process for all stakeholders,<br>
+                     including doctors, pharmacists, and clients, by providing a range of services that simplify their tasks.<br>
+                      Whether you're a healthcare professional or a client seeking a healthier life, our platform offers <br>
+                      user-friendly solutions designed to make your journey easier.</p>
+
+
+
+
+ {% endif %}
+
+
+
+
+
+ 
+  
+   
+ 
+{% endblock %}
+

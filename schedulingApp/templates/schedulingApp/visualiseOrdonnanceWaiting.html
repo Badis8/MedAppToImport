@@ -1,0 +1,39 @@
+{% extends 'schedulingApp/baseLine.html' %}  
+{% block content %}
+<h1>Visualise Pending Ordonnance</h1>
+{% csrf_token %}
+{% for Ordonnance in Ordonnances %}
+ 
+{% if Ordonnance.etat == "sent" %}
+{% if Ordonnance.decision == "neutre" %}
+<div class="card">
+    <div class="card-header">
+        <strong>Written by:  {{Ordonnance.Doctor.username}}</strong>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> Ordonnance </h5>
+      <p class="card-text"><ul>
+        {% for ligne in Ordonnance.ligne.all %}
+         
+        
+        <li> Medication name : {{ligne.Medicament.name}}</li>
+        <li>quantity: {{ligne.quantity}} </li>
+        <li>quantity per day: {{ligne.qauntityPerDay}} </li>
+        <li>remarks: {{ligne.remarks}} </li>
+        <hr>
+        
+        {% endfor %}
+  {% for PharmacistOrdonnance in Ordonnance.PharmacistOrdonnance.all %}
+ 
+        <li>Pharmacist user name: {{PharmacistOrdonnance.Pharmaciste.username}}</li>
+        <li>Pharmacist email: {{PharmacistOrdonnance.Pharmaciste.email}}</li>
+ 
+        {% endfor %}
+        </ul></p>
+    </div>
+</div>
+<br>
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endblock %}
